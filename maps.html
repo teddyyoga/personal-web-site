@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haritalar Projesi - Web GIS</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- OpenLayers Kütüphaneleri -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v8.2.0/ol.css">
+    <script src="https://cdn.jsdelivr.net/npm/ol@v8.2.0/dist/ol.js"></script>
+
+    <!-- Leaflet Kütüphaneleri -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <style>
+        /* Haritaların sayfadaki boyutunu ayarlıyoruz */
+        .map-container {
+            width: 80%;
+            height: 400px;
+            margin: 20px auto;
+            border: 2px solid #333;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Web GIS Haritalar Projesi</h1>
+    <nav>
+        <a href="index.html">Hakkımda</a> |
+        <a href="technologies.html">Teknolojiler</a> |
+        <a href="maps.html">Haritalar Projesi</a>
+    </nav>
+    <hr>
+
+    <h2>1. OpenLayers Haritası (Issue 2 Çözümü)</h2>
+    <p>Haritayı uzaklaştırdığınızda dünyanın sağa veya sola doğru kendini tekrar etmediğini görebilirsiniz.</p>
+    <div id="ol-map" class="map-container"></div>
+
+    <h2>2. Leaflet Haritası (Issue 1 Çözümü)</h2>
+    <p>Haritaya yakınlaştığınızda (Zoom seviyesi 7 ve üzeri) Ankara ve İstanbul üzerindeki işaretçiler görünür.
+        Uzaklaştığınızda kaybolurlar.</p>
+    <div id="leaflet-map" class="map-container"></div>
+
+    <script>
+        /* =========================================
+                   OPENLAYERS HARİTASI VE ISSUE 2 ÇÖZÜMÜ
+                ========================================= */
+        const olMap = new ol.Map({
+            target: 'ol-map',
+            layers: [
+                new ol.layer.Tile({
+                    source: new ol.source.XYZ({
+                        url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
+                        // ISSUE 2 ÇÖZÜMÜ: Dünyanın tekrar etmesini engeller
+                        wrapX: false
+                    })
+                })
+            ],
+            view: new ol.View({
+                center: ol.proj.fromLonLat([32.8597, 39.9208]),
+                zoom: 4
+            })
+        });
+
+        /* =========================================
+           LEAFLET HARİTASI VE ISSUE 1 ÇÖZÜMÜ
+        ========================================= */
+        const leafletMap = L.map('leaflet-map').setView([39.9208, 32.8597], 5);
+
+        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+            attribution: 'Tiles © Esri',
+            noWrap: true // Leaflet için de tekrarı kapattık
+        }).addTo(leafletMap);
+
+        const markerGroup = L.layerGroup();
+        L.marker([39.9208, 32.8597]).bindPopup("Ankara").addTo(markerGroup);
+        L.marker([41.0082, 28.9784]).bindPopup("İstanbul").addTo(markerGroup);
+
+        // ISSUE 1 ÇÖZÜMÜ: Zoom Eşiği (Threshold) Ayarı
+        const zoomThreshold = 7;
+
+        leafletMap.on('zoomend', function () {
+            if (leafletMap.getZoom() >= zoomThreshold) {
+                leafletMap.addLayer(markerGroup);
+            } else {
+                leafletMap.removeLayer(markerGroup);
+            }
+        });
+    </script>
+</body>
+
+</html>
