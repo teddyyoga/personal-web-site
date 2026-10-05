@@ -4,16 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teknolojiler - Web GIS</title>
+    <title>Softwares</title>
     <link rel="stylesheet" href="style.css"> <!-- CSS dosyamızı buraya da bağladık -->
 </head>
 
 <body>
-    <h1>Kullandığım Teknolojiler</h1>
+    <h1>Software Used on the Site</h1>
     <nav>
-        <a href="index.html">Hakkımda</a> |
-        <a href="technologies.html">Teknolojiler</a> |
-        <a href="maps.html">Haritalar Projesi</a>
+        <!-- İkonlu Tarayıcı Navigasyonu -->
+        <div class="nav-icons">
+            <button onclick="window.history.back()" class="icon-btn" title="Geri Dön">&#8592;</button>
+            <button onclick="window.history.forward()" class="icon-btn" title="İleri Git">&#8594;</button>
+            <button onclick="location.reload()" class="icon-btn" title="Sayfayı Yenile">&#8635;</button>
+            <button onclick="window.location.href='index.html'" class="icon-btn"
+                title="Ana Sayfaya Dön">&#8962;</button>
+        </div>
+
+        <div class="nav-center">
+            <a href="whoami.html">Who Am I?</a>
+            <a href="technologies.html">Software Used</a>
+            <a href="maps.html">Where Was I?</a>
+        </div>
+
+        <!-- Menüyü ortalamak için dengeleyici boşluk -->
+        <div style="width: 140px;"></div>
     </nav>
     <hr>
 
@@ -22,9 +36,9 @@
     <!-- İŞTE %10 PUANLIK TABLOMUZ BURADA BAŞLIYOR -->
     <table border="1" class="tech-table">
         <tr>
-            <th>Teknoloji Logosu</th>
-            <th>Teknoloji Adı</th>
-            <th>Açıklama</th>
+            <th> </th>
+            <th>Software </th>
+            <th>Where/Why It Was Used</th>
         </tr>
         <tr>
             <td><img src="https://cdn-icons-png.flaticon.com/512/732/732212.png" alt="HTML Logo" width="50"></td>

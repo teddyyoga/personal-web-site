@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kişisel Web Sayfam - Web GIS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="content-wrap">
+        <nav>
+            <!-- İkonlu Tarayıcı Navigasyonu -->
+            <div class="nav-icons">
+                <button onclick="window.history.back()" class="icon-btn" title="Geri Dön">&#8592;</button>
+                <button onclick="window.history.forward()" class="icon-btn" title="İleri Git">&#8594;</button>
+                <button onclick="location.reload()" class="icon-btn" title="Sayfayı Yenile">&#8635;</button>
+                <button onclick="window.location.href='index.html'" class="icon-btn"
+                    title="Ana Sayfaya Dön">&#8962;</button>
+            </div>
+
+            <div class="nav-center">
+                <a href="whoami.html">Who Am I?</a>
+                <a href="technologies.html">Software Used</a>
+                <a href="maps.html">Where Was I?</a>
+            </div>
+
+            <!-- Menüyü ortalamak için dengeleyici boşluk -->
+            <div style="width: 140px;"></div>
+        </nav>
+
+        <div class="z-block">
+            <img src="https://cdn-icons-png.flaticon.com/512/4140/4140048.png" alt="Oğuz Profil"
+                class="block-img round-img">
+            <div class="block-text text-left">
+                <h2>Oğuz Meriç</h2>
+                <p>Merhaba, ben Oğuz. Teknolojiye, dijital dünyalara ve mekansal veri sistemlerine tutkuyla bağlı bir
+                    geliştiriciyim.</p>
+                <p>Boş zamanlarımda bulut tabanlı sunucular yönetmekten, rekabetçi strateji oyunlarında vakit
+                    geçirmekten ve yeni yapay zeka araçlarını kodlama süreçlerime entegre etmekten büyük keyif alıyorum.
+                </p>
+            </div>
+        </div>
+
+        <div class="z-block reverse">
+            <div class="block-text text-right">
+                <h2>Eğitim Hayatım</h2>
+                <div class="edu-container">
+                    <div class="edu-item">
+                        🎓 Hacettepe - Harita Mühendisliği - 2022 / Devam Ediyor
+                        <div class="edu-popup">
+                            <img src="https://cdn-icons-png.flaticon.com/512/8074/8074800.png" alt="Okul Logo"
+                                class="popup-logo">
+                            <p>Hacettepe Üniversitesi Beytepe Kampüsü.</p>
+                            <a href="maps.html?konum=hacettepe" class="map-link-btn">📍 Haritada Gör</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <img src="https://cdn-icons-png.flaticon.com/512/3176/3176283.png" alt="Eğitim" class="block-img">
+        </div>
+
+        <div class="z-block">
+            <img src="https://cdn-icons-png.flaticon.com/512/2942/2942784.png" alt="Çalışma Hayatım" class="block-img">
+            <div class="block-text text-left">
+                <h2>Çalışma Hayatım</h2>
+                <div class="edu-container">
+                    <div class="edu-item" style="display: block; margin-bottom: 15px; width: fit-content;">
+                        💻 Netcad - Staj - 2025
+                        <div class="edu-popup">
+                            <img src="https://cdn-icons-png.flaticon.com/512/1005/1005141.png" alt="Netcad Logo"
+                                class="popup-logo">
+                            <p>Netcad Yazılım A.Ş. Stajyeri.</p>
+                            <a href="maps.html?konum=netcad" class="map-link-btn">📍 Haritada Gör</a>
+                        </div>
+                    </div>
+                    <div class="edu-item" style="display: block; width: fit-content;">
+                        🛣️ Karayolları 4. Bölge Müd. - Staj - 2026
+                        <div class="edu-popup">
+                            <img src="https://upload.wikimedia.org/wikipedia/tr/6/6c/Karayollar%C4%B1_Genel_M%C3%BCd%C3%BCrl%C3%BC%C4%9F%C3%BC_logo.png"
+                                alt="KGM Logo" class="popup-logo">
+                            <p>KGM 4. Bölge Müdürlüğü Stajyeri.</p>
+                            <a href="maps.html?konum=kgm" class="map-link-btn">📍 Haritada Gör</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="z-block reverse">
+            <div class="block-text text-right location-links">
+                <h2>Bulunduğum Yerler</h2>
+                <p>Genel harita görünümü için konumlara tıklayabilirsiniz:</p>
+                <ul>
+                    <li><a href="maps.html?konum=ankara">Ankara</a></li>
+                    <li><a href="maps.html?konum=trabzon">Trabzon</a></li>
+                    <li><a href="maps.html?konum=erzurum">Erzurum</a></li>
+                    <li><a href="maps.html?konum=istanbul">İstanbul</a></li>
+                    <li><a href="maps.html?konum=izmir">İzmir</a></li>
+                    <li><a href="maps.html?konum=samsun">Samsun</a></li>
+                    <li><a href="maps.html?konum=adana">Adana</a></li>
+                </ul>
+            </div>
+            <div class="mini-map-box">
+                <img src="https://cdn-icons-png.flaticon.com/512/854/854878.png" alt="Harita">
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 Oğuz Meriç - GMT 458 Web GIS Projesi
+    </footer>
+</body>
+
+</html>
