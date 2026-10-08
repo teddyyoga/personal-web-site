@@ -311,15 +311,6 @@ h2 {
     border-radius: 5px;
 }
 
-.map-container {
-    width: 80%;
-    height: 400px;
-    margin: 20px auto;
-    border: 3px solid #7b68ee;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
 footer {
     background-color: #4b3e8e;
     color: white;
@@ -396,4 +387,240 @@ footer {
 .icon-btn:hover {
     transform: scale(1.2);
     color: #d1c4e9;
+}
+
+/* --- Modern Harita ve Hızlı Menü Tasarımı --- */
+.map-container {
+    width: 85%;
+    height: 450px;
+    margin: 0 auto 40px auto;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(123, 104, 238, 0.2);
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.map-controls {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    padding: 0 20px;
+}
+
+.map-btn {
+    background-color: white;
+    color: #4b3e8e;
+    border: 2px solid #7b68ee;
+    padding: 8px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.map-btn:hover {
+    background-color: #7b68ee;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(123, 104, 238, 0.3);
+}
+
+/* --- TEKNOLOJİ KARTLARI TASARIMI --- */
+.tech-header {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: fadeIn 1s ease-out;
+}
+
+.tech-header h2 {
+    color: #4b3e8e;
+    font-size: 32px;
+}
+
+.tech-header p {
+    color: #555;
+    font-size: 18px;
+}
+
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 20px;
+    width: 90%;
+    margin: 0 auto 60px auto;
+}
+
+.tech-card {
+    background-color: white;
+    border-radius: 16px;
+    padding: 40px 20px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeIn 1.2s ease-out forwards;
+    position: relative;
+    z-index: 1;
+}
+
+.tech-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 15px 30px rgba(123, 104, 238, 0.2);
+    z-index: 10;
+}
+
+.tech-icon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.tech-card:hover .tech-icon {
+    transform: scale(1.15);
+}
+
+.tech-card h3 {
+    color: #4b3e8e;
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+.tech-card p {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* --- CONTACT ME SAYFASI TASARIMI --- */
+.contact-container {
+    width: 85%;
+    margin: 0 auto 60px auto;
+    animation: fadeIn 1s ease-out;
+}
+
+.contact-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.contact-header h2 {
+    color: #4b3e8e;
+    font-size: 32px;
+}
+
+.contact-header p {
+    color: #555;
+    font-size: 18px;
+}
+
+.contact-content {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.contact-form-box {
+    flex: 2;
+    background-color: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.input-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #4b3e8e;
+}
+
+.input-group input,
+.input-group textarea {
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-family: inherit;
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+    outline: none;
+    border-color: #7b68ee;
+    box-shadow: 0 0 8px rgba(123, 104, 238, 0.3);
+}
+
+.submit-btn {
+    background-color: #7b68ee;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    width: 100%;
+}
+
+.submit-btn:hover {
+    background-color: #4b3e8e;
+    transform: translateY(-3px);
+}
+
+.social-box {
+    flex: 1;
+    background-color: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.social-box h3 {
+    color: #4b3e8e;
+    margin-bottom: 25px;
+}
+
+.social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.social-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.social-card img {
+    width: 30px;
+    height: 30px;
+}
+
+.social-card:hover {
+    transform: translateX(10px);
+    background-color: #e2e6ea;
+    color: #7b68ee;
 }

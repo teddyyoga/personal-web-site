@@ -4,64 +4,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Softwares</title>
-    <link rel="stylesheet" href="style.css"> <!-- CSS dosyamızı buraya da bağladık -->
+    <title>Kullanılan Teknolojiler - Web GIS</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <h1>Software Used on the Site</h1>
-    <nav>
-        <!-- İkonlu Tarayıcı Navigasyonu -->
-        <div class="nav-icons">
-            <button onclick="window.history.back()" class="icon-btn" title="Geri Dön">&#8592;</button>
-            <button onclick="window.history.forward()" class="icon-btn" title="İleri Git">&#8594;</button>
-            <button onclick="location.reload()" class="icon-btn" title="Sayfayı Yenile">&#8635;</button>
-            <button onclick="window.location.href='index.html'" class="icon-btn"
-                title="Ana Sayfaya Dön">&#8962;</button>
+    <div class="content-wrap">
+        <nav>
+            <div class="nav-icons">
+                <button onclick="window.history.back()" class="icon-btn" title="Geri Dön">&#8592;</button>
+                <button onclick="window.history.forward()" class="icon-btn" title="İleri Git">&#8594;</button>
+                <button onclick="location.reload()" class="icon-btn" title="Sayfayı Yenile">&#8635;</button>
+                <button onclick="window.location.href='index.html'" class="icon-btn"
+                    title="Ana Sayfaya Dön">&#8962;</button>
+            </div>
+
+            <div class="nav-center">
+                <a href="whoami.html">Who Am I?</a>
+                <a href="maps.html">Where Was I?</a>
+                <a href="technologies.html">Software Used</a>
+                <a href="contact.html">Contact Me</a>
+            </div>
+
+            <div style="width: 140px;"></div>
+        </nav>
+
+        <div class="tech-header">
+            <h2>Kullanılan Teknolojiler ve Yazılımlar</h2>
+            <p>Bu projenin temelini oluşturan modern web ve CBS araçları.</p>
         </div>
 
-        <div class="nav-center">
-            <a href="whoami.html">Who Am I?</a>
-            <a href="technologies.html">Software Used</a>
-            <a href="maps.html">Where Was I?</a>
+        <div class="tech-grid">
+            <div class="tech-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/1051/1051277.png" alt="HTML5" class="tech-icon">
+                <h3>HTML5 & CSS3</h3>
+                <p>Sitenin sağlam iskeleti ve o şatafatlı, modern mor temanın mimarı.</p>
+            </div>
+            <div class="tech-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/1199/1199124.png" alt="JavaScript" class="tech-icon">
+                <h3>JavaScript</h3>
+                <p>Sayfalar arası akıllı geçişler ve dinamik uçuş animasyonlarının motoru.</p>
+            </div>
+            <div class="tech-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/186/186323.png" alt="OpenLayers" class="tech-icon">
+                <h3>OpenLayers</h3>
+                <p>Türkiye geneli makro harita gösterimi ve esnek katman yönetimi.</p>
+            </div>
+            <div class="tech-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/854/854878.png" alt="Leaflet" class="tech-icon">
+                <h3>Leaflet</h3>
+                <p>Ankara detayı, özel sınırlandırma kilitleri ve özel ikonlu staj işaretçileri.</p>
+            </div>
+            <div class="tech-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/11518/11518876.png" alt="VS Code" class="tech-icon">
+                <h3>VS Code & Git</h3>
+                <p>Geliştirme ortamı, versiyon kontrolü ve GitHub Pages üzerinden canlı yayın.</p>
+            </div>
+            <div class="tech-card">
+                <img src="https://cdn-icons-png.flaticon.com/512/3208/3208903.png" alt="OpenStreetMap"
+                    class="tech-icon">
+                <h3>OpenStreetMap</h3>
+                <p>Açık kaynaklı, ücretsiz ve tüm dünyanın verisini barındıran temel altlık harita.</p>
+            </div>
         </div>
+    </div>
 
-        <!-- Menüyü ortalamak için dengeleyici boşluk -->
-        <div style="width: 140px;"></div>
-    </nav>
-    <hr>
-
-    <h2>Web GIS Araçları</h2>
-
-    <!-- İŞTE %10 PUANLIK TABLOMUZ BURADA BAŞLIYOR -->
-    <table border="1" class="tech-table">
-        <tr>
-            <th> </th>
-            <th>Software </th>
-            <th>Where/Why It Was Used</th>
-        </tr>
-        <tr>
-            <td><img src="https://cdn-icons-png.flaticon.com/512/732/732212.png" alt="HTML Logo" width="50"></td>
-            <td>HTML</td>
-            <td>Web sayfasının temel iskeletini ve yapısını oluşturmak için kullanıldı.</td>
-        </tr>
-        <tr>
-            <td><img src="https://cdn-icons-png.flaticon.com/512/732/732190.png" alt="CSS Logo" width="50"></td>
-            <td>CSS</td>
-            <td>Sayfanın tasarımını, renklerini, düzenini ve animasyonlarını ayarlamak için kullanıldı.</td>
-        </tr>
-        <tr>
-            <td><img src="https://openlayers.org/theme/img/logo-dark.svg" alt="OpenLayers Logo" width="50"></td>
-            <td>OpenLayers</td>
-            <td>İnteraktif web haritaları ve katmanlar oluşturmak için kullanıldı.</td>
-        </tr>
-        <tr>
-            <td><img src="https://leafletjs.com/docs/images/logo.png" alt="Leaflet Logo" width="80"></td>
-            <td>Leaflet</td>
-            <td>Hafif ve mobil uyumlu, işaretçi içeren harita çözümleri için kullanıldı.</td>
-        </tr>
-    </table>
-
+    <footer>
+        &copy; 2026 Oğuz Meriç - GMT 458 Web GIS Projesi
+    </footer>
 </body>
 
 </html>
