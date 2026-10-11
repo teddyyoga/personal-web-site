@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 
 <head>
     <meta charset="UTF-8">
@@ -7,13 +7,14 @@
     <title>Haritalar Projesi - Web GIS</title>
     <link rel="stylesheet" href="style.css">
 
-    <!-- OpenLayers -->
+    <!-- OpenLayers & Leaflet & Cluster -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v8.2.0/ol.css">
     <script src="https://cdn.jsdelivr.net/npm/ol@v8.2.0/dist/ol.js"></script>
-
-    <!-- Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
 </head>
 
 <body>
@@ -28,17 +29,23 @@
             </div>
 
             <div class="nav-center">
-                <a href="whoami.html">Who Am I?</a>
-                <a href="maps.html">Where Was I?</a>
-                <a href="technologies.html">Software Used</a>
-                <a href="contact.html">Contact Me</a>
+                <a href="whoami.html" data-tr="Hakkımda" data-en="About Me">Hakkımda</a>
+                <a href="maps.html" data-tr="Haritalar" data-en="Maps">Haritalar</a>
+                <a href="technologies.html" data-tr="Teknolojiler" data-en="Technologies">Teknolojiler</a>
+                <a href="contact.html" data-tr="İletişim" data-en="Contact">İletişim</a>
             </div>
 
-            <div style="width: 140px;"></div>
+            <div class="ui-controls">
+                <button id="langToggle" class="lang-btn" onclick="toggleLanguage()">TR</button>
+                <button id="themeToggle" class="theme-btn" onclick="toggleTheme()"></button>
+            </div>
         </nav>
 
-        <h2>1. Türkiye Genel Görünümü (OpenLayers - OSM)</h2>
-        <p>Hızlı menüyü kullanarak iller arası geçiş yapabilirsiniz.</p>
+        <h2 data-tr="1. Türkiye Genel Görünümü (OpenLayers)" data-en="1. Turkey General Overview (OpenLayers)">1.
+            Türkiye Genel Görünümü (OpenLayers)</h2>
+        <p data-tr="Hızlı menüyü kullanarak iller arası geçiş yapabilirsiniz. Sağ üstten harita türünü değiştirebilirsiniz."
+            data-en="Use the quick menu to switch between cities. Change the map type from the top right.">Hızlı menüyü
+            kullanarak iller arası geçiş yapabilirsiniz. Sağ üstten harita türünü değiştirebilirsiniz.</p>
 
         <div class="map-controls">
             <button onclick="ucusYap('ankara')" class="map-btn">📍 Ankara</button>
@@ -50,171 +57,155 @@
             <button onclick="ucusYap('adana')" class="map-btn">📍 Adana</button>
         </div>
 
-        <div id="ol-map" class="map-container"></div>
-
-        <h2>2. Ankara Detay Haritası (Leaflet - OSM)</h2>
-        <p>Yakınlaştıkça beliren detaylı mekanlar ve staj konumları.</p>
-
-        <div class="map-controls">
-            <button onclick="ucusYap('hacettepe')" class="map-btn">🎓 Hacettepe Kampüs</button>
-            <button onclick="ucusYap('netcad')" class="map-btn">💻 Netcad Staj</button>
-            <button onclick="ucusYap('kgm')" class="map-btn">🛣️ Karayolları Staj</button>
+        <div style="position: relative; width: 90%; margin: 0 auto 40px auto;">
+            <div id="ol-map" class="map-container" style="width: 100%; margin: 0;"></div>
+            <div
+                style="position: absolute; top: 10px; right: 10px; z-index: 1000; background: white; padding: 6px 12px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+                <select onchange="olKatmanDegistir(this.value)" id="olSelect"
+                    style="border: none; outline: none; font-family: inherit; font-size: 14px; cursor: pointer; background: transparent; color: #4b3e8e; font-weight: bold;">
+                    <option value="osm" data-tr="Sokak Görünümü" data-en="Street View">Sokak Görünümü</option>
+                    <option value="satellite" data-tr="Uydu Görünümü" data-en="Satellite View">Uydu Görünümü</option>
+                </select>
+            </div>
         </div>
 
-        <div id="leaflet-map" class="map-container"></div>
+        <h2 data-tr="2. Ankara Detay Haritası (Leaflet)" data-en="2. Ankara Detail Map (Leaflet)">2. Ankara Detay
+            Haritası (Leaflet)</h2>
+        <p data-tr="Yakınlaştıkça beliren detaylı mekanlar, staj konumları ve harita katmanları."
+            data-en="Detailed locations, internship spots, and map layers appearing as you zoom in.">Yakınlaştıkça
+            beliren detaylı mekanlar, staj konumları ve harita katmanları.</p>
+
+        <div class="map-controls">
+            <button onclick="ucusYap('hacettepe')" class="map-btn" data-tr="🎓 Hacettepe Kampüs"
+                data-en="🎓 Hacettepe Campus">🎓 Hacettepe Kampüs</button>
+            <button onclick="ucusYap('netcad')" class="map-btn" data-tr="💻 Netcad Staj"
+                data-en="💻 Netcad Internship">💻 Netcad Staj</button>
+            <button onclick="ucusYap('kgm')" class="map-btn" data-tr="🛣️ Karayolları Staj"
+                data-en="🛣️ Highways Internship">🛣️ Karayolları Staj</button>
+        </div>
+
+        <div style="position: relative; width: 90%; margin: 0 auto 40px auto;">
+            <div id="leaflet-map" class="map-container" style="width: 100%; margin: 0;"></div>
+            <div
+                style="position: absolute; top: 10px; right: 10px; z-index: 1000; background: white; padding: 6px 12px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+                <select onchange="leafletKatmanDegistir(this.value)" id="leafletSelect"
+                    style="border: none; outline: none; font-family: inherit; font-size: 14px; cursor: pointer; background: transparent; color: #4b3e8e; font-weight: bold;">
+                    <option value="osm" data-tr="Sokak Görünümü" data-en="Street View">Sokak Görünümü</option>
+                    <option value="satellite" data-tr="Uydu Görünümü" data-en="Satellite View">Uydu Görünümü</option>
+                </select>
+            </div>
+        </div>
     </div>
 
-    <footer>
+    <footer data-tr="&copy; 2026 Oğuz Meriç - GMT 458 Web GIS Projesi"
+        data-en="&copy; 2026 Oğuz Meriç - GMT 458 Web GIS Project">
         &copy; 2026 Oğuz Meriç - GMT 458 Web GIS Projesi
     </footer>
 
+    <!-- Harita Scriptleri -->
     <script>
-        // --- 1. OPENLAYERS (OSM TABANLI) ---
-        const olMap = new ol.Map({
-            target: 'ol-map',
-            layers: [
-                new ol.layer.Tile({
-                    source: new ol.source.OSM({
-                        wrapX: false
-                    })
-                })
-            ],
-            view: new ol.View({
-                center: ol.proj.fromLonLat([35.2433, 38.9637]),
-                zoom: 5
-            })
+        // --- 1. OPENLAYERS ---
+        const olLocations = {
+            'ankara': [32.8597, 39.9208], 'trabzon': [39.7168, 41.0027], 'erzurum': [41.2769, 39.9043],
+            'istanbul': [28.9784, 41.0082], 'izmir': [27.1428, 38.4237], 'samsun': [36.3300, 41.2867], 'adana': [35.3213, 37.0000]
+        };
+        const vectorSource = new ol.source.Vector();
+        const iconStyle = new ol.style.Style({ image: new ol.style.Icon({ anchor: [0.5, 1], src: 'https://cdn-icons-png.flaticon.com/512/684/684908.png', scale: 0.05 }) });
+        for (let city in olLocations) {
+            let feature = new ol.Feature({ geometry: new ol.geom.Point(ol.proj.fromLonLat(olLocations[city])) });
+            feature.setStyle(iconStyle);
+            vectorSource.addFeature(feature);
+        }
+        const vectorLayer = new ol.layer.Vector({ source: vectorSource });
+        const olOsmLayer = new ol.layer.Tile({ source: new ol.source.OSM({ wrapX: false }), visible: true });
+        const olUyduLayer = new ol.layer.Tile({
+            source: new ol.source.XYZ({ url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', wrapX: false, attributions: 'Tiles &copy; Esri' }),
+            visible: false
         });
+        const olMap = new ol.Map({ target: 'ol-map', layers: [olOsmLayer, olUyduLayer, vectorLayer], view: new ol.View({ center: ol.proj.fromLonLat([35.2433, 38.9637]), zoom: 5 }) });
+        function olKatmanDegistir(secim) {
+            if (secim === 'osm') { olOsmLayer.setVisible(true); olUyduLayer.setVisible(false); }
+            else { olOsmLayer.setVisible(false); olUyduLayer.setVisible(true); }
+        }
 
-        // --- 2. LEAFLET (ANKARA SINIRLARI VE MİNİMUM ZOOM İLE) ---
-        const ankaraSinirlari = [
-            [38.50, 31.30],
-            [40.80, 34.20]
-        ];
+        // --- 2. LEAFLET ---
+        const ankaraSinirlari = [[38.50, 31.30], [40.80, 34.20]];
+        const osmLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OSM', noWrap: true });
+        const uyduLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: '&copy; Esri', noWrap: true });
+        const leafletMap = L.map('leaflet-map', { maxBounds: ankaraSinirlari, maxBoundsViscosity: 1.0, minZoom: 8, layers: [osmLayer] }).setView([39.9208, 32.8597], 10);
+        function leafletKatmanDegistir(secim) {
+            if (secim === 'osm') { leafletMap.removeLayer(uyduLayer); leafletMap.addLayer(osmLayer); }
+            else { leafletMap.removeLayer(osmLayer); leafletMap.addLayer(uyduLayer); }
+        }
+        const markerGroup = L.markerClusterGroup({ maxClusterRadius: 50, disableClusteringAtZoom: 15 });
 
-        const leafletMap = L.map('leaflet-map', {
-            maxBounds: ankaraSinirlari,
-            maxBoundsViscosity: 1.0,
-            minZoom: 8
-        }).setView([39.9208, 32.8597], 10);
+        const merkezIcon = L.icon({ iconUrl: 'https://cdn-icons-png.flaticon.com/512/814/814406.png', iconSize: [40, 40], iconAnchor: [20, 40], popupAnchor: [0, -40] });
+        const okulIcon = L.icon({ iconUrl: 'https://cdn-icons-png.flaticon.com/512/8074/8074800.png', iconSize: [45, 45], iconAnchor: [22, 45], popupAnchor: [0, -45] });
 
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; OpenStreetMap contributors',
-            noWrap: true
-        }).addTo(leafletMap);
-
-        const markerGroup = L.layerGroup();
-
-        // --- 3. ÖZEL İKON TASARIMLARI ---
-        const merkezIcon = L.icon({
-            iconUrl: 'https://cdn-icons-png.flaticon.com/512/814/814406.png',
-            iconSize: [40, 40],
-            iconAnchor: [20, 40],
-            popupAnchor: [0, -40]
-        });
-
-        const okulIcon = L.icon({
-            iconUrl: 'https://cdn-icons-png.flaticon.com/512/8074/8074800.png',
-            iconSize: [45, 45],
-            iconAnchor: [22, 45],
-            popupAnchor: [0, -45]
-        });
-
-        const netcadIcon = L.icon({
-            iconUrl: 'https://cdn-icons-png.flaticon.com/512/1005/1005141.png',
-            iconSize: [40, 40],
-            iconAnchor: [20, 40],
-            popupAnchor: [0, -40]
-        });
-
-        const kgmIcon = L.icon({
-            iconUrl: 'https://cdn-icons-png.flaticon.com/512/3062/3062206.png',
-            iconSize: [45, 45],
-            iconAnchor: [22, 45],
-            popupAnchor: [0, -45]
-        });
-
-        // --- 4. POPUP İÇERİKLERİ ---
-        const merkezIcerik = `
-            <div style="text-align:center; font-family:sans-serif;">
-                <h3 style="margin:5px 0; color:#4b3e8e;">Ankara Merkez</h3>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/K%C4%B1z%C4%B1lay_Square.jpg/320px-K%C4%B1z%C4%B1lay_Square.jpg" width="150" style="border-radius:8px;">
-                <p style="margin:5px 0; font-size:14px; color:#333;">Şehrin kalbi.</p>
-            </div>
-        `;
-        const okulIcerik = `
-            <div style="text-align:center; font-family:sans-serif;">
-                <h3 style="margin:5px 0; color:#4b3e8e;">Hacettepe Kampüs</h3>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Hacettepe_University_Beytepe_Campus.jpg/320px-Hacettepe_University_Beytepe_Campus.jpg" width="150" style="border-radius:8px;">
-                <p style="margin:5px 0; font-size:14px; color:#333;">Zamanımın çoğunun geçtiği yer.</p>
-            </div>
-        `;
-        const netcadIcerik = `
-            <div style="text-align:center; font-family:sans-serif;">
-                <h3 style="margin:5px 0; color:#4b3e8e;">Netcad Yazılım</h3>
-                <img src="https://cdn-icons-png.flaticon.com/512/1005/1005141.png" width="100" style="border-radius:8px;">
-                <p style="margin:5px 0; font-size:14px; color:#333;">2025 Staj Konumu.</p>
-            </div>
-        `;
-        const kgmIcerik = `
-            <div style="text-align:center; font-family:sans-serif;">
-                <h3 style="margin:5px 0; color:#4b3e8e;">Karayolları 4. Bölge</h3>
-                <img src="https://upload.wikimedia.org/wikipedia/tr/6/6c/Karayollar%C4%B1_Genel_M%C3%BCd%C3%BCrl%C3%BC%C4%9F%C3%BC_logo.png" width="100" style="border-radius:8px;">
-                <p style="margin:5px 0; font-size:14px; color:#333;">2026 Staj Konumu.</p>
-            </div>
-        `;
-
-        // --- 5. MARKERLARI EKLENTİYE ALMA ---
-        L.marker([39.9208, 32.8597], { icon: merkezIcon }).bindPopup(merkezIcerik).addTo(markerGroup);
-        L.marker([39.8686, 32.7344], { icon: okulIcon }).bindPopup(okulIcerik).addTo(markerGroup);
-        L.marker([39.8680, 32.7480], { icon: netcadIcon }).bindPopup(netcadIcerik).addTo(markerGroup);
-        L.marker([39.955800, 32.851084], { icon: kgmIcon }).bindPopup(kgmIcerik).addTo(markerGroup);
+        L.marker([39.9208, 32.8597], { icon: merkezIcon }).bindPopup(`<div style="text-align:center;"><h3 style="margin:5px 0; color:#4b3e8e;">Ankara Merkez</h3><p>Şehrin kalbi.</p></div>`).addTo(markerGroup);
+        L.marker([39.8686, 32.7344], { icon: okulIcon }).bindPopup(`<div style="text-align:center;"><h3 style="margin:5px 0; color:#4b3e8e;">Hacettepe Kampüs</h3><p>Zamanımın çoğunun geçtiği yer.</p></div>`).addTo(markerGroup);
 
         const zoomThreshold = 12;
-
         leafletMap.on('zoomend', function () {
-            if (leafletMap.getZoom() >= zoomThreshold) {
-                leafletMap.addLayer(markerGroup);
-            } else {
-                leafletMap.removeLayer(markerGroup);
-            }
+            if (leafletMap.getZoom() >= zoomThreshold) { leafletMap.addLayer(markerGroup); }
+            else { leafletMap.removeLayer(markerGroup); }
         });
 
-        // --- 6. UÇUŞ FONKSİYONU ---
+        // --- 3. UÇUŞ FONKSİYONU ---
         function ucusYap(konum) {
-            const olLocations = {
-                'ankara': [32.8597, 39.9208],
-                'trabzon': [39.7168, 41.0027],
-                'erzurum': [41.2769, 39.9043],
-                'istanbul': [28.9784, 41.0082],
-                'izmir': [27.1428, 38.4237],
-                'samsun': [36.3300, 41.2867],
-                'adana': [35.3213, 37.0000]
-            };
+            if (olLocations[konum]) { olMap.getView().animate({ center: ol.proj.fromLonLat(olLocations[konum]), zoom: 9, duration: 2000 }); }
+            else if (konum === 'hacettepe') { leafletMap.flyTo([39.8686, 32.7344], 15, { animate: true, duration: 2 }); }
+            else if (konum === 'netcad') { leafletMap.flyTo([39.8680, 32.7480], 15, { animate: true, duration: 2 }); }
+            else if (konum === 'kgm') { leafletMap.flyTo([39.955800, 32.851084], 15, { animate: true, duration: 2 }); }
+        }
+    </script>
 
-            if (olLocations[konum]) {
-                olMap.getView().animate({
-                    center: ol.proj.fromLonLat(olLocations[konum]),
-                    zoom: 9,
-                    duration: 2000
-                });
-            } else if (konum === 'hacettepe') {
-                leafletMap.flyTo([39.8686, 32.7344], 15, { animate: true, duration: 2 });
-            } else if (konum === 'netcad') {
-                leafletMap.flyTo([39.8680, 32.7480], 15, { animate: true, duration: 2 });
-            } else if (konum === 'kgm') {
-                leafletMap.flyTo([39.955800, 32.851084], 15, { animate: true, duration: 2 });
+    <!-- TEMA VE DİL DEĞİŞTİRME SCRIPT'I -->
+    <script>
+        const sunIcon = `<svg viewBox="0 0 24 24" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
+        const moonIcon = `<svg viewBox="0 0 24 24" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle('dark-mode');
+            const themeBtn = document.getElementById('themeToggle');
+
+            if (body.classList.contains('dark-mode')) {
+                themeBtn.innerHTML = sunIcon;
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeBtn.innerHTML = moonIcon;
+                localStorage.setItem('theme', 'light');
             }
         }
 
-        // --- 7. URL PARAMETRESİ YAKALAMA ---
-        const urlParams = new URLSearchParams(window.location.search);
-        const baslangicKonum = urlParams.get('konum');
+        let currentLang = localStorage.getItem('lang') || 'tr';
 
-        if (baslangicKonum) {
-            setTimeout(() => {
-                ucusYap(baslangicKonum);
-            }, 500);
+        function toggleLanguage() {
+            currentLang = currentLang === 'tr' ? 'en' : 'tr';
+            localStorage.setItem('lang', currentLang);
+            applyLanguage();
         }
+
+        function applyLanguage() {
+            const elements = document.querySelectorAll('[data-tr]');
+            elements.forEach(el => {
+                el.innerHTML = el.getAttribute(`data-${currentLang}`);
+            });
+            const langBtn = document.getElementById('langToggle');
+            if (langBtn) langBtn.textContent = currentLang === 'tr' ? 'EN' : 'TR';
+        }
+
+        window.onload = () => {
+            const themeBtn = document.getElementById('themeToggle');
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark-mode');
+                if (themeBtn) themeBtn.innerHTML = sunIcon;
+            } else {
+                if (themeBtn) themeBtn.innerHTML = moonIcon;
+            }
+            applyLanguage();
+        };
     </script>
 </body>
 

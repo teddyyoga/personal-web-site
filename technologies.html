@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kullanılan Teknolojiler - Web GIS</title>
+    <title>Teknolojiler - Web GIS</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div class="content-wrap">
+        <!-- MENÜ KISMI -->
         <nav>
             <div class="nav-icons">
                 <button onclick="window.history.back()" class="icon-btn" title="Geri Dön">&#8592;</button>
@@ -20,58 +21,134 @@
             </div>
 
             <div class="nav-center">
-                <a href="whoami.html">Who Am I?</a>
-                <a href="maps.html">Where Was I?</a>
-                <a href="technologies.html">Software Used</a>
-                <a href="contact.html">Contact Me</a>
+                <a href="whoami.html" data-tr="Hakkımda" data-en="About Me">Hakkımda</a>
+                <a href="maps.html" data-tr="Haritalar" data-en="Maps">Haritalar</a>
+                <a href="technologies.html" data-tr="Teknolojiler" data-en="Technologies">Teknolojiler</a>
+                <a href="contact.html" data-tr="İletişim" data-en="Contact">İletişim</a>
             </div>
 
-            <div style="width: 140px;"></div>
+            <div class="ui-controls">
+                <button id="langToggle" class="lang-btn" onclick="toggleLanguage()">EN</button>
+                <button id="themeToggle" class="theme-btn" onclick="toggleTheme()"></button>
+            </div>
         </nav>
 
+        <!-- TEKNOLOJİLER İÇERİĞİ -->
         <div class="tech-header">
-            <h2>Kullanılan Teknolojiler ve Yazılımlar</h2>
-            <p>Bu projenin temelini oluşturan modern web ve CBS araçları.</p>
+            <h2 data-tr="Kullanılan Teknolojiler" data-en="Technologies Used">Kullanılan Teknolojiler</h2>
+            <p data-tr="Bu projeyi hayata geçirirken kullandığım modern web ve CBS araçları."
+                data-en="Modern web and GIS tools used to build this project.">Bu projeyi hayata geçirirken kullandığım
+                modern web ve CBS araçları.</p>
         </div>
 
         <div class="tech-grid">
+            <!-- Kart 1: HTML & CSS -->
             <div class="tech-card">
-                <img src="https://cdn-icons-png.flaticon.com/512/1051/1051277.png" alt="HTML5" class="tech-icon">
+                <img src="https://cdn-icons-png.flaticon.com/512/104/104627.png" alt="HTML5 CSS3" class="tech-icon">
                 <h3>HTML5 & CSS3</h3>
-                <p>Sitenin sağlam iskeleti ve o şatafatlı, modern mor temanın mimarı.</p>
+                <p data-tr="Projenin temel iskeleti, Flexbox/Grid mimarisi ve modern UI/UX tasarımı."
+                    data-en="The skeleton of the project, Flexbox/Grid architecture, and modern UI/UX design.">Projenin
+                    temel iskeleti, Flexbox/Grid mimarisi ve modern UI/UX tasarımı.</p>
             </div>
+
+            <!-- Kart 2: JavaScript -->
             <div class="tech-card">
-                <img src="https://cdn-icons-png.flaticon.com/512/1199/1199124.png" alt="JavaScript" class="tech-icon">
-                <h3>JavaScript</h3>
-                <p>Sayfalar arası akıllı geçişler ve dinamik uçuş animasyonlarının motoru.</p>
+                <img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png" alt="JavaScript" class="tech-icon">
+                <h3>JavaScript (ES6+)</h3>
+                <p data-tr="Dinamik harita etkileşimleri, akıllı dil (TR/EN) çevirmeni ve karanlık tema (Dark Mode) algoritması."
+                    data-en="Dynamic map interactions, smart language (TR/EN) translator, and dark mode algorithm.">
+                    Dinamik harita etkileşimleri, akıllı dil (TR/EN) çevirmeni ve karanlık tema (Dark Mode) algoritması.
+                </p>
             </div>
+
+            <!-- Kart 3: OpenLayers -->
             <div class="tech-card">
-                <img src="https://cdn-icons-png.flaticon.com/512/186/186323.png" alt="OpenLayers" class="tech-icon">
-                <h3>OpenLayers</h3>
-                <p>Türkiye geneli makro harita gösterimi ve esnek katman yönetimi.</p>
+                <img src="https://cdn-icons-png.flaticon.com/512/1865/1865269.png" alt="OpenLayers" class="tech-icon">
+                <h3>OpenLayers (v8)</h3>
+                <p data-tr="Türkiye geneli makro bakış açısı, vektör pinler ve iller arası sinematik uçuş (Fly-to) animasyonları."
+                    data-en="Macro overview of Turkey, vector pins, and cinematic fly-to animations between cities.">
+                    Türkiye geneli makro bakış açısı, vektör pinler ve iller arası sinematik uçuş (Fly-to)
+                    animasyonları.</p>
             </div>
+
+            <!-- Kart 4: Leaflet -->
             <div class="tech-card">
                 <img src="https://cdn-icons-png.flaticon.com/512/854/854878.png" alt="Leaflet" class="tech-icon">
-                <h3>Leaflet</h3>
-                <p>Ankara detayı, özel sınırlandırma kilitleri ve özel ikonlu staj işaretçileri.</p>
+                <h3>Leaflet.js</h3>
+                <p data-tr="Ankara'ya hapsedilmiş detaylı mikro harita, katman değiştirici ve akıllı Marker Clustering (Kümeleme) özelliği."
+                    data-en="Detailed micro map constrained to Ankara, layer switcher, and smart Marker Clustering feature.">
+                    Ankara'ya hapsedilmiş detaylı mikro harita, katman değiştirici ve akıllı Marker Clustering
+                    (Kümeleme) özelliği.</p>
             </div>
+
+            <!-- Kart 5: GitHub -->
             <div class="tech-card">
-                <img src="https://cdn-icons-png.flaticon.com/512/11518/11518876.png" alt="VS Code" class="tech-icon">
-                <h3>VS Code & Git</h3>
-                <p>Geliştirme ortamı, versiyon kontrolü ve GitHub Pages üzerinden canlı yayın.</p>
-            </div>
-            <div class="tech-card">
-                <img src="https://cdn-icons-png.flaticon.com/512/3208/3208903.png" alt="OpenStreetMap"
-                    class="tech-icon">
-                <h3>OpenStreetMap</h3>
-                <p>Açık kaynaklı, ücretsiz ve tüm dünyanın verisini barındıran temel altlık harita.</p>
+                <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="GitHub" class="tech-icon">
+                <h3>Git & GitHub Pages</h3>
+                <p data-tr="Projenin versiyon kontrolü (Commit) ve internette herkese açık canlı bir web sitesi olarak barındırılması."
+                    data-en="Version control (Commit) of the project and hosting it as a public live website on the internet.">
+                    Projenin versiyon kontrolü (Commit) ve internette herkese açık canlı bir web sitesi olarak
+                    barındırılması.</p>
             </div>
         </div>
+
+        <footer data-tr="&copy; 2026 Oğuz Meriç - GMT 458 Web GIS Projesi"
+            data-en="&copy; 2026 Oğuz Meriç - GMT 458 Web GIS Project">
+            &copy; 2026 Oğuz Meriç - GMT 458 Web GIS Projesi
+        </footer>
     </div>
 
-    <footer>
-        &copy; 2026 Oğuz Meriç - GMT 458 Web GIS Projesi
-    </footer>
+    <!-- TEMA VE DİL DEĞİŞTİRME SCRIPT'I -->
+    <script>
+        const sunIcon = `<svg viewBox="0 0 24 24" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
+        const moonIcon = `<svg viewBox="0 0 24 24" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle('dark-mode');
+            const themeBtn = document.getElementById('themeToggle');
+
+            if (body.classList.contains('dark-mode')) {
+                themeBtn.innerHTML = sunIcon;
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeBtn.innerHTML = moonIcon;
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        let currentLang = localStorage.getItem('lang') || 'tr';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'tr' ? 'en' : 'tr';
+            localStorage.setItem('lang', currentLang);
+            applyLanguage();
+        }
+
+        function applyLanguage() {
+            const elements = document.querySelectorAll('[data-tr]');
+            elements.forEach(el => {
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.setAttribute('placeholder', el.getAttribute(`data-${currentLang}`));
+                } else {
+                    el.innerHTML = el.getAttribute(`data-${currentLang}`);
+                }
+            });
+            const langBtn = document.getElementById('langToggle');
+            if (langBtn) langBtn.textContent = currentLang === 'tr' ? 'EN' : 'TR';
+        }
+
+        window.onload = () => {
+            const themeBtn = document.getElementById('themeToggle');
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark-mode');
+                if (themeBtn) themeBtn.innerHTML = sunIcon;
+            } else {
+                if (themeBtn) themeBtn.innerHTML = moonIcon;
+            }
+            applyLanguage();
+        };
+    </script>
 </body>
 
 </html>

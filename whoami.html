@@ -1,11 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kişisel Web Sayfam - Web GIS</title>
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        body.dark-mode .z-block {
+            background-color: #1e1e1e;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        body.dark-mode .block-text h2 {
+            color: #b39ddb;
+        }
+
+        body.dark-mode .block-text p {
+            color: #bbb;
+        }
+
+        body.dark-mode .edu-item {
+            background-color: #2c2c2c;
+            color: #e0e0e0;
+            border: 1px solid #444;
+        }
+
+        body.dark-mode .edu-item:hover {
+            background-color: #7b68ee;
+            color: white;
+            border-color: #7b68ee;
+        }
+
+        body.dark-mode .edu-popup {
+            background-color: #1e1e1e;
+            border: 1px solid #444;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        body.dark-mode .edu-popup p {
+            color: #ccc;
+        }
+
+        body.dark-mode .location-links a {
+            background-color: #2c2c2c;
+            color: #e0e0e0;
+            border-color: #444;
+        }
+
+        body.dark-mode .location-links a:hover {
+            background-color: #7b68ee;
+            color: white;
+        }
+
+        .tech-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: white;
+            border: 2px solid #7b68ee;
+            color: #4b3e8e;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .tech-tag:hover {
+            background-color: #7b68ee;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(123, 104, 238, 0.3);
+        }
+
+        .tech-tag img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+        }
+
+        body.dark-mode .tech-tag {
+            background-color: #2c2c2c;
+            color: #e0e0e0;
+            border-color: #444;
+        }
+
+        body.dark-mode .tech-tag:hover {
+            background-color: #7b68ee;
+            color: white;
+            border-color: #7b68ee;
+        }
+    </style>
 </head>
 
 <body>
@@ -20,12 +109,16 @@
             </div>
 
             <div class="nav-center">
-                <a href="whoami.html">Who Am I?</a>
-                <a href="maps.html">Where Was I?</a>
-                <a href="technologies.html">Software Used</a>
-                <a href="contact.html">Contact Me</a>
+                <a href="whoami.html" data-tr="Hakkımda" data-en="About Me">Hakkımda</a>
+                <a href="maps.html" data-tr="Haritalar" data-en="Maps">Haritalar</a>
+                <a href="technologies.html" data-tr="Teknolojiler" data-en="Technologies">Teknolojiler</a>
+                <a href="contact.html" data-tr="İletişim" data-en="Contact">İletişim</a>
             </div>
-            <div style="width: 140px;"></div>
+
+            <div class="ui-controls">
+                <button id="langToggle" class="lang-btn" onclick="toggleLanguage()">EN</button>
+                <button id="themeToggle" class="theme-btn" onclick="toggleTheme()"></button>
+            </div>
         </nav>
 
         <div class="z-block">
@@ -33,9 +126,14 @@
                 class="block-img round-img">
             <div class="block-text text-left">
                 <h2>Oğuz Meriç</h2>
-                <p>Merhaba, ben Oğuz. Teknolojiye, dijital dünyalara ve mekansal veri sistemlerine tutkuyla bağlı bir
-                    geliştiriciyim.</p>
-                <p>Boş zamanlarımda bulut tabanlı sunucular yönetmekten, rekabetçi strateji oyunlarında vakit
+                <p data-tr="Merhaba, ben Oğuz. Teknolojiye, dijital dünyalara ve mekansal veri sistemlerine tutkuyla bağlı bir geliştiriciyim."
+                    data-en="Hello, I'm Oğuz. I am a developer passionate about technology, digital worlds, and spatial data systems.">
+                    Merhaba, ben Oğuz. Teknolojiye, dijital dünyalara ve mekansal veri sistemlerine tutkuyla bağlı bir
+                    geliştiriciyim.
+                </p>
+                <p data-tr="Boş zamanlarımda bulut tabanlı sunucular yönetmekten, rekabetçi strateji oyunlarında vakit geçirmekten ve yeni yapay zeka araçlarını kodlama süreçlerime entegre etmekten büyük keyif alıyorum."
+                    data-en="In my free time, I deeply enjoy managing cloud-based servers, spending time in competitive strategy games, and integrating new AI tools into my coding workflow.">
+                    Boş zamanlarımda bulut tabanlı sunucular yönetmekten, rekabetçi strateji oyunlarında vakit
                     geçirmekten ve yeni yapay zeka araçlarını kodlama süreçlerime entegre etmekten büyük keyif alıyorum.
                 </p>
             </div>
@@ -43,15 +141,21 @@
 
         <div class="z-block reverse">
             <div class="block-text text-right">
-                <h2>Eğitim Hayatım</h2>
+                <h2 data-tr="Eğitim Hayatım" data-en="Education">Eğitim Hayatım</h2>
                 <div class="edu-container">
                     <div class="edu-item">
-                        🎓 Hacettepe - Harita Mühendisliği - 2022 / Devam Ediyor
+                        <span data-tr="🎓 Hacettepe - Harita Mühendisliği - 2022 / Devam Ediyor"
+                            data-en="🎓 Hacettepe - Geomatics Engineering - 2022 / Ongoing">
+                            🎓 Hacettepe - Harita Mühendisliği - 2022 / Devam Ediyor
+                        </span>
                         <div class="edu-popup">
                             <img src="https://cdn-icons-png.flaticon.com/512/8074/8074800.png" alt="Okul Logo"
                                 class="popup-logo">
-                            <p>Hacettepe Üniversitesi Beytepe Kampüsü.</p>
-                            <a href="maps.html?konum=hacettepe" class="map-link-btn">📍 Haritada Gör</a>
+                            <p data-tr="Hacettepe Üniversitesi Beytepe Kampüsü."
+                                data-en="Hacettepe University Beytepe Campus.">Hacettepe Üniversitesi Beytepe Kampüsü.
+                            </p>
+                            <a href="maps.html?konum=hacettepe" class="map-link-btn" data-tr="📍 Haritada Gör"
+                                data-en="📍 See on Map">📍 Haritada Gör</a>
                         </div>
                     </div>
                 </div>
@@ -62,24 +166,31 @@
         <div class="z-block">
             <img src="https://cdn-icons-png.flaticon.com/512/2942/2942784.png" alt="Çalışma Hayatım" class="block-img">
             <div class="block-text text-left">
-                <h2>Çalışma Hayatım</h2>
+                <h2 data-tr="Çalışma Hayatım" data-en="Work Experience">Çalışma Hayatım</h2>
                 <div class="edu-container">
                     <div class="edu-item" style="display: block; margin-bottom: 15px; width: fit-content;">
-                        💻 Netcad - Staj - 2025
+                        <span data-tr="💻 Netcad - Staj - 2025" data-en="💻 Netcad - Internship - 2025">💻 Netcad - Staj
+                            - 2025</span>
                         <div class="edu-popup">
-                            <img src="https://cdn-icons-png.flaticon.com/512/1005/1005141.png" alt="Netcad Logo"
-                                class="popup-logo">
-                            <p>Netcad Yazılım A.Ş. Stajyeri.</p>
-                            <a href="maps.html?konum=netcad" class="map-link-btn">📍 Haritada Gör</a>
+                            <img src="https://cdn-icons-png.flaticon.com/512/1005/1005141.png" alt="Netcad İkonu"
+                                class="popup-logo" style="border-radius: 8px;">
+                            <p data-tr="Netcad Yazılım A.Ş. Stajyeri." data-en="Netcad Software Inc. Intern.">Netcad
+                                Yazılım A.Ş. Stajyeri.</p>
+                            <a href="maps.html?konum=netcad" class="map-link-btn" data-tr="📍 Haritada Gör"
+                                data-en="📍 See on Map">📍 Haritada Gör</a>
                         </div>
                     </div>
                     <div class="edu-item" style="display: block; width: fit-content;">
-                        🛣️ Karayolları 4. Bölge Müd. - Staj - 2026
+                        <span data-tr="🛣️ Karayolları 4. Bölge Müd. - Staj - 2026"
+                            data-en="🛣️ Highways 4th Regional Directorate - Internship - 2026">🛣️ Karayolları 4. Bölge
+                            Müd. - Staj - 2026</span>
                         <div class="edu-popup">
-                            <img src="https://upload.wikimedia.org/wikipedia/tr/6/6c/Karayollar%C4%B1_Genel_M%C3%BCd%C3%BCrl%C3%BC%C4%9F%C3%BC_logo.png"
-                                alt="KGM Logo" class="popup-logo">
-                            <p>KGM 4. Bölge Müdürlüğü Stajyeri.</p>
-                            <a href="maps.html?konum=kgm" class="map-link-btn">📍 Haritada Gör</a>
+                            <img src="https://cdn-icons-png.flaticon.com/512/3062/3062206.png" alt="KGM İkonu"
+                                class="popup-logo" style="border-radius: 8px;">
+                            <p data-tr="KGM 4. Bölge Müdürlüğü Stajyeri."
+                                data-en="KGM 4th Regional Directorate Intern.">KGM 4. Bölge Müdürlüğü Stajyeri.</p>
+                            <a href="maps.html?konum=kgm" class="map-link-btn" data-tr="📍 Haritada Gör"
+                                data-en="📍 See on Map">📍 Haritada Gör</a>
                         </div>
                     </div>
                 </div>
@@ -88,8 +199,10 @@
 
         <div class="z-block reverse">
             <div class="block-text text-right location-links">
-                <h2>Bulunduğum Yerler</h2>
-                <p>Genel harita görünümü için konumlara tıklayabilirsiniz:</p>
+                <h2 data-tr="Bulunduğum Yerler" data-en="Places I've Been">Bulunduğum Yerler</h2>
+                <p data-tr="Genel harita görünümü için konumlara tıklayabilirsiniz:"
+                    data-en="You can click on locations for a general map view:">Genel harita görünümü için konumlara
+                    tıklayabilirsiniz:</p>
                 <ul>
                     <li><a href="maps.html?konum=ankara">Ankara</a></li>
                     <li><a href="maps.html?konum=trabzon">Trabzon</a></li>
@@ -104,11 +217,106 @@
                 <img src="https://cdn-icons-png.flaticon.com/512/854/854878.png" alt="Harita">
             </div>
         </div>
+
+        <div class="z-block">
+            <img src="https://cdn-icons-png.flaticon.com/512/2065/2065157.png" alt="Yetenekler" class="block-img">
+            <div class="block-text text-left">
+                <h2 data-tr="Yetenekler ve Yazılımlar" data-en="Skills & Software">Yetenekler ve Yazılımlar</h2>
+                <p data-tr="Mekansal analiz, veri tabanı yönetimi ve harita üretimi için aktif olarak kullandığım teknolojiler:"
+                    data-en="Technologies I actively use for spatial analysis, database management, and map production:">
+                    Mekansal analiz, veri tabanı yönetimi ve harita üretimi için aktif olarak kullandığım teknolojiler:
+                </p>
+                <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 15px;">
+                    <span class="tech-tag">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/QGIS_logo_new.svg" alt="QGIS">
+                        QGIS
+                    </span>
+                    <span class="tech-tag">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1005/1005141.png" alt="Netcad"> Netcad
+                    </span>
+                    <span class="tech-tag">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg"
+                            alt="Python"> Python
+                    </span>
+                    <span class="tech-tag">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Visual_Studio_Code_1.35_icon.svg"
+                            alt="VS Code"> VS Code
+                    </span>
+                    <span class="tech-tag">
+                        <img src="https://cdn-icons-png.flaticon.com/512/8676/8676495.png" alt="Antigravity">
+                        Antigravity
+                    </span>
+                    <span class="tech-tag">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg"
+                            alt="PostgreSQL"> PostgreSQL
+                    </span>
+                    <span class="tech-tag">
+                        <img src="https://cdn-icons-png.flaticon.com/512/2888/2888407.png" alt="pgAdmin"> pgAdmin
+                    </span>
+                    <span class="tech-tag">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1865/1865269.png" alt="OpenLayers"> OpenLayers
+                    </span>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <footer>
+    <footer data-tr="&copy; 2026 Oğuz Meriç - GMT 458 Web GIS Projesi"
+        data-en="&copy; 2026 Oğuz Meriç - GMT 458 Web GIS Project">
         &copy; 2026 Oğuz Meriç - GMT 458 Web GIS Projesi
     </footer>
+
+    <script>
+        const sunIcon = `<svg viewBox="0 0 24 24" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
+        const moonIcon = `<svg viewBox="0 0 24 24" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle('dark-mode');
+            const themeBtn = document.getElementById('themeToggle');
+
+            if (body.classList.contains('dark-mode')) {
+                themeBtn.innerHTML = sunIcon;
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeBtn.innerHTML = moonIcon;
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        let currentLang = localStorage.getItem('lang') || 'tr';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'tr' ? 'en' : 'tr';
+            localStorage.setItem('lang', currentLang);
+            applyLanguage();
+        }
+
+        function applyLanguage() {
+            const elements = document.querySelectorAll('[data-tr]');
+            elements.forEach(el => {
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.setAttribute('placeholder', el.getAttribute(`data-${currentLang}`));
+                } else {
+                    el.innerHTML = el.getAttribute(`data-${currentLang}`);
+                }
+            });
+            const langBtn = document.getElementById('langToggle');
+            if (langBtn) langBtn.textContent = currentLang === 'tr' ? 'EN' : 'TR';
+        }
+
+        window.onload = () => {
+            const themeBtn = document.getElementById('themeToggle');
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark-mode');
+                if (themeBtn) themeBtn.innerHTML = sunIcon;
+            } else {
+                if (themeBtn) themeBtn.innerHTML = moonIcon;
+            }
+            applyLanguage();
+        };
+    </script>
 </body>
 
 </html>

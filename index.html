@@ -1,19 +1,189 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oğuz Meriç - Geleceğin Mühendisi</title>
+    <title>Ana Sayfa - Web GIS</title>
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* ANA SAYFA ÖZEL ARKA PLAN VE YERLEŞİM */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(-45deg, #7b68ee, #4b3e8e, #6a5acd, #9370DB);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            transition: background 0.5s ease;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        body.dark-mode {
+            background: linear-gradient(-45deg, #0a0a0a, #1a1a2e, #16213e, #0f3460);
+            background-size: 400% 400%;
+        }
+
+        /* İÇERİK KUTUSU VE YAZILAR */
+        .landing-box {
+            text-align: center;
+            color: white;
+            z-index: 10;
+            animation: fadeIn 1.5s ease-out;
+            padding: 40px;
+        }
+
+        .landing-box h1 {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            transition: text-shadow 0.3s ease;
+        }
+
+        body.dark-mode .landing-box h1 {
+            text-shadow: 0 0 20px rgba(179, 157, 219, 0.6);
+        }
+
+        .landing-box p {
+            font-size: 1.3rem;
+            margin-bottom: 50px;
+            color: #e0e0e0;
+            font-weight: 300;
+            transition: color 0.3s ease;
+        }
+
+        body.dark-mode .landing-box p {
+            color: #b39ddb;
+        }
+
+
+        .landing-nav {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .landing-nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.3rem;
+            font-weight: bold;
+            padding: 10px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .landing-nav a:hover {
+            color: #d1c4e9;
+            transform: translateY(-3px);
+            text-shadow: 0 4px 10px rgba(255, 255, 255, 0.4);
+        }
+
+        body.dark-mode .landing-nav a:hover {
+            color: #b39ddb;
+            text-shadow: 0 4px 10px rgba(179, 157, 219, 0.6);
+        }
+
+        /* SAĞ ÜST KONTROLLER */
+        .top-right-controls {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            z-index: 100;
+        }
+    </style>
 </head>
 
-<body class="landing-body">
-    <div class="landing-content">
-        <h1>Geleceğin Mühendisi</h1>
-        <p>Mekansal Verilerin Gücü, Dijital Dünyanın Sınırları.</p>
-        <a href="whoami.html" class="enter-btn">Portfolyoyu İncele &raquo;</a>
+<body>
+
+    <!-- Sağ Üst Tema ve Dil Butonları -->
+    <div class="top-right-controls ui-controls">
+        <button id="langToggle" class="lang-btn" onclick="toggleLanguage()">EN</button>
+        <button id="themeToggle" class="theme-btn" onclick="toggleTheme()"></button>
     </div>
+
+
+    <div class="landing-box">
+        <h1 data-tr="Geleceğin Mühendisi" data-en="Engineer of the Future">Geleceğin Mühendisi</h1>
+        <p data-tr="Mekansal Verilerin Gücü, Dijital Dünyanın Sınırları."
+            data-en="Power of Spatial Data, Boundaries of the Digital World.">Mekansal Verilerin Gücü, Dijital Dünyanın
+            Sınırları.</p>
+
+        <div class="landing-nav">
+            <a href="whoami.html" data-tr="Hakkımda" data-en="About Me">Hakkımda</a>
+            <a href="maps.html" data-tr="Haritalar" data-en="Maps">Haritalar</a>
+            <a href="technologies.html" data-tr="Teknolojiler" data-en="Technologies">Teknolojiler</a>
+            <a href="contact.html" data-tr="İletişim" data-en="Contact">İletişim</a>
+        </div>
+    </div>
+
+    <!-- TEMA VE DİL SİSTEMİ SCRIPT'I -->
+    <script>
+        const sunIcon = `<svg viewBox="0 0 24 24" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
+        const moonIcon = `<svg viewBox="0 0 24 24" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle('dark-mode');
+            const themeBtn = document.getElementById('themeToggle');
+
+            if (body.classList.contains('dark-mode')) {
+                themeBtn.innerHTML = sunIcon;
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeBtn.innerHTML = moonIcon;
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        let currentLang = localStorage.getItem('lang') || 'tr';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'tr' ? 'en' : 'tr';
+            localStorage.setItem('lang', currentLang);
+            applyLanguage();
+        }
+
+        function applyLanguage() {
+            const elements = document.querySelectorAll('[data-tr]');
+            elements.forEach(el => {
+                el.innerHTML = el.getAttribute(`data-${currentLang}`);
+            });
+            const langBtn = document.getElementById('langToggle');
+            if (langBtn) langBtn.textContent = currentLang === 'tr' ? 'EN' : 'TR';
+        }
+
+        window.onload = () => {
+            const themeBtn = document.getElementById('themeToggle');
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark-mode');
+                if (themeBtn) themeBtn.innerHTML = sunIcon;
+            } else {
+                if (themeBtn) themeBtn.innerHTML = moonIcon;
+            }
+            applyLanguage();
+        };
+    </script>
 </body>
 
 </html>
