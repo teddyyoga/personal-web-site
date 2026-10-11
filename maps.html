@@ -137,19 +137,23 @@
             if (secim === 'osm') { leafletMap.removeLayer(uyduLayer); leafletMap.addLayer(osmLayer); }
             else { leafletMap.removeLayer(osmLayer); leafletMap.addLayer(uyduLayer); }
         }
+
         const markerGroup = L.markerClusterGroup({ maxClusterRadius: 50, disableClusteringAtZoom: 15 });
 
+        // İkonlar
         const merkezIcon = L.icon({ iconUrl: 'https://cdn-icons-png.flaticon.com/512/814/814406.png', iconSize: [40, 40], iconAnchor: [20, 40], popupAnchor: [0, -40] });
         const okulIcon = L.icon({ iconUrl: 'https://cdn-icons-png.flaticon.com/512/8074/8074800.png', iconSize: [45, 45], iconAnchor: [22, 45], popupAnchor: [0, -45] });
+        const netcadIcon = L.icon({ iconUrl: 'https://cdn-icons-png.flaticon.com/512/1005/1005141.png', iconSize: [40, 40], iconAnchor: [20, 40], popupAnchor: [0, -40] });
+        const kgmIcon = L.icon({ iconUrl: 'https://cdn-icons-png.flaticon.com/512/3062/3062206.png', iconSize: [45, 45], iconAnchor: [22, 45], popupAnchor: [0, -45] });
 
+        // Marker'lar (Pinler)
         L.marker([39.9208, 32.8597], { icon: merkezIcon }).bindPopup(`<div style="text-align:center;"><h3 style="margin:5px 0; color:#4b3e8e;">Ankara Merkez</h3><p>Şehrin kalbi.</p></div>`).addTo(markerGroup);
         L.marker([39.8686, 32.7344], { icon: okulIcon }).bindPopup(`<div style="text-align:center;"><h3 style="margin:5px 0; color:#4b3e8e;">Hacettepe Kampüs</h3><p>Zamanımın çoğunun geçtiği yer.</p></div>`).addTo(markerGroup);
+        L.marker([39.8680, 32.7480], { icon: netcadIcon }).bindPopup(`<div style="text-align:center;"><h3 style="margin:5px 0; color:#4b3e8e;">Netcad Yazılım</h3><p>2025 Staj Konumu.</p></div>`).addTo(markerGroup);
+        L.marker([39.955800, 32.851084], { icon: kgmIcon }).bindPopup(`<div style="text-align:center;"><h3 style="margin:5px 0; color:#4b3e8e;">Karayolları 4. Bölge</h3><p>2026 Staj Konumu.</p></div>`).addTo(markerGroup);
 
-        const zoomThreshold = 12;
-        leafletMap.on('zoomend', function () {
-            if (leafletMap.getZoom() >= zoomThreshold) { leafletMap.addLayer(markerGroup); }
-            else { leafletMap.removeLayer(markerGroup); }
-        });
+        // İkonların her zaman görünmesi için gruba doğrudan ekliyoruz
+        leafletMap.addLayer(markerGroup);
 
         // --- 3. UÇUŞ FONKSİYONU ---
         function ucusYap(konum) {
@@ -197,6 +201,7 @@
         }
 
         window.onload = () => {
+            // 1. Tema Ayarları
             const themeBtn = document.getElementById('themeToggle');
             if (localStorage.getItem('theme') === 'dark') {
                 document.body.classList.add('dark-mode');
@@ -204,7 +209,20 @@
             } else {
                 if (themeBtn) themeBtn.innerHTML = moonIcon;
             }
+
+            // 2. Dil Ayarları
             applyLanguage();
+
+            // 3. EFSANEVİ UÇUŞ DÜZELTMESİ (Diğer sayfadan gelen konumu yakala ve uç)
+            const urlParams = new URLSearchParams(window.location.search);
+            const hedefKonum = urlParams.get('konum');
+
+            if (hedefKonum) {
+                // Haritaların (Leaflet ve OpenLayers) tam yüklenmesi için ufak bir pay verip uçuşu başlatıyoruz
+                setTimeout(() => {
+                    ucusYap(hedefKonum);
+                }, 600);
+            }
         };
     </script>
 </body>
